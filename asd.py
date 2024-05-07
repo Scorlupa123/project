@@ -1,7 +1,23 @@
 from tkinter import *
+
+class Question:
+    ('gghh?', ['', '', '', ''], ['', '', '', ''])
+
+class QuestionsManager:
+    def __init__(self):
+        self.data = [,
+                     ()] 
+        self.curr = -1
+        
+    def next_question(self):
+        self.curr += 1
+        return self.data[self.curr]
+
 class Example:
-    def __init__(self, a, b, c, d, e):
+    def __init__(self):
         self.master = Tk()
+        self.QM =  QuestionsManager()
+        self.question =  self.QM.next_question()
         self.label = Label(self.master, text=a)
         self.label.grid(row=0, column=1)
         self.button = Button(self.master, text=b, command=self.change_button_color)
@@ -31,6 +47,6 @@ class Example:
         self.button3.config(bg='green')
     def next_quastion(self):
         self.master.destroy()
-        Example('123', '123', '123', '123','asdasd')
+        Example()
 
 Example('asdasd','asdasd','asdasd','asdasd','esadasd')
