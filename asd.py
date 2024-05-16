@@ -1,4 +1,6 @@
+
 from tkinter import *
+
 
 class Question:
     def __init__(self, que, arr_ans, arr_col):
@@ -14,7 +16,8 @@ class Question:
 
     def get_color(self, id):
         return self.colors[id]
-        
+
+
 class QuestionsManager:
     def __init__(self):
         self.data = []
@@ -22,6 +25,11 @@ class QuestionsManager:
 
     def next(self):
         self.cursor += 1
+
+    def des(self):
+        if self.cursor == len(self.data)-1:
+            return True
+        return False
 
     def add_data(self, que, arr_ans, arr_col):
         if self.cursor == -1:
@@ -37,14 +45,19 @@ class QuestionsManager:
     def get_cursor(self):
         return self.cursor
 
-QM = QuestionsManager()
 
-QM.add_data('умный?', ['да', 'нет', 'не уверен', 'точно нет'], ['red', 'red', 'red', 'green'])
-QM.add_data('умный?', ['да', 'нет', 'не уверен', 'точно нет'], ['red', 'green', 'red', 'red'])
-QM.add_data('умный?', ['да', 'нет', 'не уверен', 'точно нет'], ['red', 'red', 'red', 'green'])
-QM.add_data('умный?', ['да', 'нет', 'не уверен', 'точно нет'], ['red', 'red', 'red', 'green'])
+QM = QuestionsManager()
+a = "Shiva's Guard"
+QM.add_data('Самый популярный персонаж DOTA2', ['Dragon Knight', 'Shadow Fiend', 'Anti-Mage', 'Pudge'],
+            ['red', 'red', 'red', 'green'])
+QM.add_data(f'Сколько стоит  {a}?', ['3000', '4550', '5175', '5200'], ['red', 'red', 'green', 'red'])
+QM.add_data('Игрок команды Team Spirit', ['Collapse', 'Durachyo', 'Quinn', 'TORONTOTOKYO'],
+            ['green', 'red', 'red', 'red'])
+QM.add_data('Какие призовые были у TI 10?', ['$1,521,362', '$9,139,002', '$8,518,822', '$18,208,300'],
+            ['red', 'red', 'red', 'green'])
 
 master = Tk()
+
 
 class Example:
     def __init__(self):
@@ -81,10 +94,13 @@ class Example:
         self.button3.config(bg=self.data.get_color(3))
 
     def next_quastion(self):
+        if QM.des():
+            exit(0)
         destroy_object = [self.label, self.button, self.button1, self.button2, self.button3, self.button4]
         for object_name in destroy_object:
             object_name.destroy()
         QM.next()
         self.__init__()
+
 
 Example()
